@@ -23,6 +23,7 @@ public static class ConfigServiceExtensions
         var baseConfig = new ConfigurationBuilder<IEvoScBaseConfig>()
             .UseTomlFile(MainConfigFile)
             .UseTypeParser(new TextColorTypeParser())
+            .UseTypeParser(new CultureInfoTypeParser())
             .Build();
 
         services.RegisterInstance<IEvoScBaseConfig>(baseConfig);

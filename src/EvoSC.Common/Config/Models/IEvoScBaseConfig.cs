@@ -8,4 +8,5 @@ public interface IEvoScBaseConfig
     public IPathConfig Path { get; set; }
     public IThemeConfig Theme { get; set; }
     public IModuleConfig Modules { get; set; }
+    public ILocalizationConfig Localization { get; set; }
 }
