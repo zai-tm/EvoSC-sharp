@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Data.Common;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
 using Config.Net;
@@ -288,6 +289,12 @@ public class ModuleManager : IModuleManager
         {
             foreach (var module in assembly.Modules)
             {
+
+                if (!module.Name.Contains("resources"))
+                {
+                    container.RegisterInstance<ResourceManager>(new ResourceManager(assembly.GetName().Name + ".Localization", assembly));
+                }
+
                 foreach (var type in module.GetTypes())
                 {
                     var configAttr = type.GetCustomAttribute<SettingsAttribute>();
@@ -304,7 +311,6 @@ public class ModuleManager : IModuleManager
 
                     var store = await CreateModuleConfigStore(moduleInfo.Name, type);
                     var config = CreateConfigInstance(type, store);
-
                     if (config == null)
                     {
                         throw new InvalidOperationException("Failed to create module config instance.");

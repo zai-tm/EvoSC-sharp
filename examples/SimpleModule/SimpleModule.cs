@@ -18,15 +18,15 @@ public class SimpleModule : EvoScModule, IToggleable
     private ResourceManager _resManager;
     private CultureInfo _cultureInfo;
 
-    public SimpleModule(IEvoScBaseConfig config, ILogger<SimpleModule> logger)
+    public SimpleModule(IEvoScBaseConfig config, ILogger<SimpleModule> logger, ResourceManager resManager)
     {
         _config = config;
         _logger = logger;
+        _resManager = resManager;
     }
 
     public Task Enable()
     {
-        _resManager = new ResourceManager("SimpleModule.Localization", typeof(SimpleModule).Assembly);
         _cultureInfo = _config.Localization.CultureInfo;
         _logger.LogDebug(_resManager.GetString("SimpleModule.helloworld", _cultureInfo));
         return Task.CompletedTask;
