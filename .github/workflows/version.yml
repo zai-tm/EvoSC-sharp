@@ -31,8 +31,8 @@ jobs:
           version: bump-build
 
       - run: |
-          git config user.name "Version Bumper"
-          git config user.email "evo@users.noreply.github.com"
+          git config user.name "evotm-bot"
+          git config user.email "evotm-bot@users.noreply.github.com"
           git add .
           git commit -m "Bump project version to ${{ steps.bump.outputs.newVersion }}"
           git push
